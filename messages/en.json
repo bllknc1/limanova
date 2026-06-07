@@ -6,7 +6,8 @@
     "citizenship": "Citizenship",
     "shop": "Shop",
     "login": "Login",
-    "apply": "Apply Now"
+    "apply": "Apply Now",
+    "profile": "My Profile"
   },
   "hero": {
     "subtitle": "Science State — Heart of the Sea",
@@ -203,7 +204,28 @@
     "bio": "Biography",
     "projects": "Projects & Research",
     "titles": "Titles & Honors",
-    "edit": "Edit Profile"
+    "vision": "Contribution Vision",
+    "edit": "Edit Profile",
+    "cancel": "Cancel",
+    "save": "SAVE",
+    "logout": "LOGOUT",
+    "empty_bio": "No biography added yet. Click edit to introduce yourself.",
+    "empty_projects": "No projects added yet.",
+    "empty_titles": "No titles added yet."
+  },
+  "login": {
+    "title": "CITIZEN LOGIN",
+    "subtitle": "LIMANOVA IDENTITY VERIFICATION",
+    "email": "Email Address",
+    "email_placeholder": "citizen@limanova.com",
+    "access_code": "Access Code",
+    "code_placeholder": "• • • • • • • •",
+    "btn": "LOGIN",
+    "invalid": "Invalid email or access code. Please check your citizenship approval message.",
+    "error": "Connection error. Please try again.",
+    "no_account": "Not a citizen yet?",
+    "apply_link": "Apply for Citizenship",
+    "note": "Your access code is sent to your email along with your citizenship approval."
   },
   "admin": {
     "title": "Deep State — Admin Panel",

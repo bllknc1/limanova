@@ -25,6 +25,7 @@ export default function AdminPage() {
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all');
   const [stats, setStats] = useState({ total: 0, pending: 0, approved: 0, rejected: 0, paid: 0 });
+  const [accessCodeModal, setAccessCodeModal] = useState<{ name: string; email: string; code: string; citizenshipNo: string } | null>(null);
 
   const fetchApplications = useCallback(async () => {
     setLoading(true);
@@ -63,6 +64,15 @@ export default function AdminPage() {
       const data = await res.json();
       if (data.ok) {
         await fetchApplications();
+        // Show access code if approved
+        if (action === 'approve' && data.accessCode) {
+          setAccessCodeModal({
+            name: `${data.citizen.first_name} ${data.citizen.last_name}`,
+            email: data.citizen.email,
+            code: data.accessCode,
+            citizenshipNo: data.citizen.citizenship_number || 'TBD',
+          });
+        }
       } else {
         alert('Hata: ' + (data.error || 'Bilinmeyen hata'));
       }
@@ -101,7 +111,7 @@ export default function AdminPage() {
             DERİN DEVLET
           </h1>
           <p style={{ color: 'var(--text3)', fontSize: '.85rem', marginBottom: '2rem', letterSpacing: '.1em' }}>
-            YÖNETIM PANELİ
+            YÖNETİM PANELİ
           </p>
 
           <form onSubmit={(e) => {
@@ -147,6 +157,136 @@ export default function AdminPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--navy)', padding: '2rem' }}>
+      {/* Access Code Modal */}
+      {accessCodeModal && (
+        <div style={{
+          position: 'fixed', inset: 0,
+          background: 'rgba(0,0,0,0.8)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 1000,
+        }} onClick={() => setAccessCodeModal(null)}>
+          <div style={{
+            background: 'var(--navy2)',
+            border: '2px solid var(--gold)',
+            padding: '3rem',
+            maxWidth: 500,
+            width: '90%',
+            textAlign: 'center',
+            position: 'relative',
+          }} onClick={(e) => e.stopPropagation()}>
+            {/* Corner decorations */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: 20, height: 20, borderTop: '2px solid var(--gold)', borderLeft: '2px solid var(--gold)' }} />
+            <div style={{ position: 'absolute', top: 0, right: 0, width: 20, height: 20, borderTop: '2px solid var(--gold)', borderRight: '2px solid var(--gold)' }} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, width: 20, height: 20, borderBottom: '2px solid var(--gold)', borderLeft: '2px solid var(--gold)' }} />
+            <div style={{ position: 'absolute', bottom: 0, right: 0, width: 20, height: 20, borderBottom: '2px solid var(--gold)', borderRight: '2px solid var(--gold)' }} />
+
+            <div style={{ fontSize: '2rem', marginBottom: '.8rem' }}>✓</div>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              color: '#22c55e',
+              fontSize: '1.1rem',
+              letterSpacing: '.12em',
+              marginBottom: '.5rem',
+            }}>
+              VATANDAŞLIK ONAYLANDI
+            </h2>
+            <p style={{ color: 'var(--text2)', marginBottom: '1.5rem' }}>
+              {accessCodeModal.name}
+            </p>
+
+            <div style={{
+              background: 'var(--navy)',
+              border: '1px solid var(--border2)',
+              padding: '1.5rem',
+              marginBottom: '1rem',
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '.65rem',
+                letterSpacing: '.2em',
+                color: 'var(--text3)',
+                marginBottom: '.5rem',
+              }}>
+                ERİŞİM KODU
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '1.5rem',
+                color: 'var(--gold)',
+                letterSpacing: '.15em',
+                marginBottom: '.8rem',
+              }}>
+                {accessCodeModal.code}
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '.65rem',
+                letterSpacing: '.2em',
+                color: 'var(--text3)',
+                marginBottom: '.3rem',
+              }}>
+                VATANDAŞLIK NO
+              </div>
+              <div style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '1rem',
+                color: 'var(--teal2)',
+                letterSpacing: '.1em',
+              }}>
+                {accessCodeModal.citizenshipNo}
+              </div>
+            </div>
+
+            <p style={{
+              color: 'var(--text3)',
+              fontSize: '.8rem',
+              marginBottom: '1rem',
+              lineHeight: 1.5,
+            }}>
+              Bu erişim kodunu vatandaşa e-posta ile gönderin.<br/>
+              E-posta: <span style={{ color: 'var(--teal2)' }}>{accessCodeModal.email}</span>
+            </p>
+
+            <div style={{ display: 'flex', gap: '.5rem', justifyContent: 'center' }}>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `Limanova Vatandaşlık Onayı\n\nHoş geldin, ${accessCodeModal.name}!\n\nVatandaşlık No: ${accessCodeModal.citizenshipNo}\nErişim Kodu: ${accessCodeModal.code}\n\nGiriş: https://limanova.vercel.app/tr/login`
+                  );
+                }}
+                style={{
+                  background: 'var(--gold)',
+                  color: 'var(--navy)',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '.7rem',
+                  letterSpacing: '.1em',
+                  padding: '10px 20px',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                📋 KOPYALA
+              </button>
+              <button
+                onClick={() => setAccessCodeModal(null)}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--border)',
+                  color: 'var(--text3)',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '.7rem',
+                  letterSpacing: '.1em',
+                  padding: '10px 20px',
+                  cursor: 'pointer',
+                }}
+              >
+                KAPAT
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <div style={{
         display: 'flex',

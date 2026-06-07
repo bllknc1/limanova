@@ -27,6 +27,7 @@ export type Citizen = {
   payment_status: 'unpaid' | 'paid';
   created_at: string;
   avatar_url: string | null;
+  access_code: string | null;
 };
 
 export type Application = {

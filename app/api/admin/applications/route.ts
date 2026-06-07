@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import crypto from 'crypto';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,6 +10,17 @@ function getSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
   return createClient(url, key);
+}
+
+// Generate a human-readable access code
+function generateAccessCode(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // No I/O/0/1 for readability
+  let code = 'LMN-';
+  for (let i = 0; i < 8; i++) {
+    code += chars[crypto.randomInt(chars.length)];
+    if (i === 3) code += '-';
+  }
+  return code; // Format: LMN-XXXX-XXXX
 }
 
 // GET — Tüm başvuruları getir
@@ -25,7 +37,13 @@ export async function GET(req: NextRequest) {
     .order('created_at', { ascending: false });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ applications: data });
+
+  // Also get citizen count
+  const { count } = await supabase
+    .from('citizens')
+    .select('*', { count: 'exact', head: true });
+
+  return NextResponse.json({ applications: data, citizenCount: count ?? 0 });
 }
 
 // POST — Başvuruyu onayla veya reddet
@@ -63,6 +81,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Application not found' }, { status: 404 });
   }
 
+  // Generate unique access code for the citizen
+  const accessCode = generateAccessCode();
+
   // Citizens tablosuna ekle (citizenship_number otomatik trigger ile oluşur)
   const { data: citizen, error: citizenErr } = await supabase
     .from('citizens')
@@ -74,6 +95,7 @@ export async function POST(req: NextRequest) {
       science_field: app.science_field,
       vision: app.vision,
       status: 'approved',
+      access_code: accessCode,
     })
     .select()
     .single();
@@ -88,5 +110,10 @@ export async function POST(req: NextRequest) {
     .update({ status: 'approved' })
     .eq('id', applicationId);
 
-  return NextResponse.json({ ok: true, action: 'approved', citizen });
+  return NextResponse.json({
+    ok: true,
+    action: 'approved',
+    citizen,
+    accessCode, // Admin panelinde görüntülenir — vatandaşa gönderilecek
+  });
 }

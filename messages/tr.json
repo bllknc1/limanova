@@ -6,7 +6,8 @@
     "citizenship": "Vatandaşlık",
     "shop": "Mağaza",
     "login": "Giriş",
-    "apply": "Başvur"
+    "apply": "Başvur",
+    "profile": "Profilim"
   },
   "hero": {
     "subtitle": "Bilim Devleti — Denizin Kalbinde",
@@ -203,7 +204,28 @@
     "bio": "Biyografi",
     "projects": "Projeler ve Araştırmalar",
     "titles": "Unvanlar ve Onurlar",
-    "edit": "Profili Düzenle"
+    "vision": "Katkı Vizyonu",
+    "edit": "Profili Düzenle",
+    "cancel": "İptal",
+    "save": "KAYDET",
+    "logout": "ÇIKIŞ",
+    "empty_bio": "Henüz biyografi eklenmedi. Düzenle butonuna tıklayarak kendinizi tanıtın.",
+    "empty_projects": "Henüz proje eklenmedi.",
+    "empty_titles": "Henüz unvan eklenmedi."
+  },
+  "login": {
+    "title": "VATANDAŞ GİRİŞİ",
+    "subtitle": "LİMANOVA KİMLİK DOĞRULAMA",
+    "email": "E-posta Adresi",
+    "email_placeholder": "vatandas@limanova.com",
+    "access_code": "Erişim Kodu",
+    "code_placeholder": "• • • • • • • •",
+    "btn": "GİRİŞ YAP",
+    "invalid": "Geçersiz e-posta veya erişim kodu. Lütfen vatandaşlık onay mesajınızı kontrol edin.",
+    "error": "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
+    "no_account": "Henüz vatandaş değil misiniz?",
+    "apply_link": "Vatandaşlık Başvurusu Yap",
+    "note": "Erişim kodu, vatandaşlık onayınızla birlikte e-posta adresinize gönderilir."
   },
   "admin": {
     "title": "Derin Devlet — Yönetim Paneli",
