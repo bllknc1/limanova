@@ -205,6 +205,25 @@
     "titles": "Titles & Honors",
     "edit": "Edit Profile"
   },
+  "admin": {
+    "title": "Deep State — Admin Panel",
+    "subtitle": "Citizenship Commission Control Center",
+    "login_title": "DEEP STATE",
+    "login_sub": "ADMIN PANEL",
+    "enter_code": "Access code",
+    "login": "LOGIN",
+    "logout": "LOGOUT",
+    "total": "Total",
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "paid": "Paid",
+    "approve": "APPROVE",
+    "reject": "REJECT",
+    "refresh": "REFRESH",
+    "visions": "APPLICATION VISIONS",
+    "no_applications": "No applications found."
+  },
   "common": {
     "loading": "Loading...",
     "error": "An error occurred.",
