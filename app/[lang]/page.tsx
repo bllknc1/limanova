@@ -41,14 +41,14 @@ export default async function HomePage({ params: { lang } }: { params: { lang: s
           }} />
 
           {/* Seal */}
-          <div style={{ width: 120, height: 120, margin: '0 auto 2rem', position: 'relative' }}>
-            <svg viewBox="0 0 120 120" className="animate-seal" style={{ width: '100%', height: '100%' }}>
-              <circle cx="60" cy="60" r="56" fill="none" stroke="#c9a227" strokeWidth="1" strokeDasharray="3 4"/>
-              <circle cx="60" cy="60" r="48" fill="none" stroke="#c9a22744" strokeWidth="0.5"/>
-              <text fontFamily="Cinzel,serif" fontSize="7.5" fill="#c9a227" letterSpacing="3">
+          <div style={{ width: 160, height: 160, margin: '0 auto 2rem', position: 'relative' }}>
+            <svg viewBox="0 0 160 160" className="animate-seal" style={{ width: '100%', height: '100%' }}>
+              <circle cx="80" cy="80" r="78" fill="none" stroke="#c9a227" strokeWidth="1" strokeDasharray="4 5"/>
+              <circle cx="80" cy="80" r="60" fill="none" stroke="#c9a22744" strokeWidth="0.5"/>
+              <text fontFamily="Cinzel,serif" fontSize="8.5" fill="#c9a227" letterSpacing="4">
                 <textPath href="#cp">LIMANOVA • SCIENCE STATE • MMXXV •</textPath>
               </text>
-              <defs><path id="cp" d="M60,8 a52,52 0 1,1 -0.1,0"/></defs>
+              <defs><path id="cp" d="M80,14 a66,66 0 1,1 -0.1,0"/></defs>
             </svg>
             <div style={{
               position: 'absolute', inset: '20px',
