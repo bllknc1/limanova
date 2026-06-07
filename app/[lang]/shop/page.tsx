@@ -31,8 +31,7 @@ export default function ShopPage() {
     setAddress('');
   };
 
-  const categories = [...new Set(items.map((i: any) => i.category))];
-
+const categories = Array.from(new Set(items.map((i: any) => i.category)));
   return (
     <>
       <Navbar />
