@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Cinzel, Crimson_Pro } from 'next/font/google';
-import './globals.css';
+import '../globals.css';
 
 const cinzel = Cinzel({ subsets: ['latin'], variable: '--font-cinzel', weight: ['400', '600', '700'] });
 const crimson = Crimson_Pro({ subsets: ['latin'], variable: '--font-crimson', weight: ['300', '400', '600'], style: ['normal', 'italic'] });
