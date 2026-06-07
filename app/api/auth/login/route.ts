@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   const supabase = getSupabase();
 
-  // Find citizen by email
+  // Find citizen by email and access code
   const { data: citizen, error } = await supabase
     .from('citizens')
     .select('*')
@@ -30,6 +30,11 @@ export async function POST(req: NextRequest) {
 
   if (error || !citizen) {
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+  }
+
+  // Check if citizen is suspended/passive
+  if (citizen.status === 'suspended') {
+    return NextResponse.json({ error: 'Citizenship suspended' }, { status: 403 });
   }
 
   // Generate a session token

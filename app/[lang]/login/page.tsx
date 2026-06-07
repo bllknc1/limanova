@@ -30,7 +30,11 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (!res.ok || !data.ok) {
-        setError(t('invalid'));
+        if (res.status === 403) {
+          setError(t('suspended'));
+        } else {
+          setError(t('invalid'));
+        }
         setLoading(false);
         return;
       }

@@ -86,13 +86,28 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, newAction: 'code_set' });
   }
 
-  // --- Vatandaş silme ---
-  if (newAction === 'delete_citizen' && citizenId) {
-    // Delete sessions first
+  // --- Vatandaş pasife alma (silme değil) ---
+  if (newAction === 'suspend_citizen' && citizenId) {
+    // Tüm oturumları sonlandır
     await supabase.from('citizen_sessions').delete().eq('citizen_id', citizenId);
-    const { error } = await supabase.from('citizens').delete().eq('id', citizenId);
+    // Durumu suspended yap
+    const { error } = await supabase
+      .from('citizens')
+      .update({ status: 'suspended', access_code: null })
+      .eq('id', citizenId);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json({ ok: true, newAction: 'citizen_deleted' });
+    return NextResponse.json({ ok: true, newAction: 'citizen_suspended' });
+  }
+
+  // --- Vatandaş tekrar aktif etme ---
+  if (newAction === 'reactivate_citizen' && citizenId) {
+    const newCode = generateAccessCode();
+    const { error } = await supabase
+      .from('citizens')
+      .update({ status: 'approved', access_code: newCode })
+      .eq('id', citizenId);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, newAction: 'citizen_reactivated', accessCode: newCode });
   }
 
   // --- Başvuru işlemleri ---

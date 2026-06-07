@@ -222,6 +222,7 @@
     "code_placeholder": "• • • • • • • •",
     "btn": "GİRİŞ YAP",
     "invalid": "Geçersiz e-posta veya erişim kodu. Lütfen vatandaşlık onay mesajınızı kontrol edin.",
+    "suspended": "Vatandaşlığınız askıya alınmıştır. Detaylı bilgi için yönetime başvurun.",
     "error": "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
     "no_account": "Henüz vatandaş değil misiniz?",
     "apply_link": "Vatandaşlık Başvurusu Yap",

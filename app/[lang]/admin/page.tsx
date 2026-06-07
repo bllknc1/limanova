@@ -69,10 +69,20 @@ export default function AdminPage() {
     setBusy(null);
   };
 
-  const deleteCitizen = async (citizenId: string, name: string) => {
-    if (!confirm(`${name} silinsin mi?`)) return;
+  const suspendCitizen = async (citizenId: string, name: string) => {
+    if (!confirm(`${name} pasife alınsın mı? Giriş yapamayacak.`)) return;
     setBusy(citizenId);
-    try { await fetch('/api/admin/applications', { method: 'POST', headers: jsonHdr, body: JSON.stringify({ citizenId, newAction: 'delete_citizen' }) }); await fetchData(); } catch {}
+    try { await fetch('/api/admin/applications', { method: 'POST', headers: jsonHdr, body: JSON.stringify({ citizenId, newAction: 'suspend_citizen' }) }); await fetchData(); } catch {}
+    setBusy(null);
+  };
+
+  const reactivateCitizen = async (citizenId: string) => {
+    setBusy(citizenId);
+    try {
+      const res = await fetch('/api/admin/applications', { method: 'POST', headers: jsonHdr, body: JSON.stringify({ citizenId, newAction: 'reactivate_citizen' }) });
+      const d = await res.json();
+      if (d.ok) { await fetchData(); alert('Aktif edildi! Yeni kod: ' + d.accessCode); }
+    } catch {}
     setBusy(null);
   };
 
@@ -188,7 +198,7 @@ export default function AdminPage() {
           <div style={{ overflowX:'auto' }}>
             <table style={{ width:'100%',borderCollapse:'collapse',fontSize:'.9rem' }}>
               <thead><tr style={{ borderBottom:'1px solid var(--border2)' }}>
-                {['Ad Soyad','E-posta','Vatandaşlık No','Erişim Kodu','Ülke','Alan','Tarih','İşlem'].map(h=><th key={h} style={thS}>{h}</th>)}
+                {['Ad Soyad','E-posta','Vatandaşlık No','Erişim Kodu','Ülke','Alan','Tarih','Durum','İşlem'].map(h=><th key={h} style={thS}>{h}</th>)}
               </tr></thead>
               <tbody>{citizens.map(c=>(
                 <tr key={c.id} style={{ borderBottom:'1px solid var(--border)' }}>
@@ -214,9 +224,18 @@ export default function AdminPage() {
                   <td style={{ ...tdS, color:'var(--teal2)', fontSize:'.85rem' }}>{c.science_field}</td>
                   <td style={{ ...tdS, color:'var(--text3)', fontSize:'.8rem' }}>{new Date(c.created_at).toLocaleDateString('tr-TR')}</td>
                   <td style={tdS}>
+                    <span style={badge(c.status==='suspended'?'rgba(239,68,68,.15)':'rgba(34,197,94,.15)', c.status==='suspended'?'#ef4444':'#22c55e')}>{c.status==='suspended'?'PASİF':'AKTİF'}</span>
+                  </td>
+                  <td style={tdS}>
                     <div style={{ display:'flex',gap:'.3rem' }}>
-                      <button onClick={()=>regenerateCode(c.id)} disabled={busy===c.id} style={{ ...btnS('var(--navy3)','var(--teal2)'), border:'1px solid var(--border)', opacity:busy===c.id?.5:1 }}>🔄 YENİ KOD</button>
-                      <button onClick={()=>deleteCitizen(c.id,`${c.first_name} ${c.last_name}`)} disabled={busy===c.id} style={{ ...btnS('transparent','#ef4444'), border:'1px solid rgba(239,68,68,.3)', opacity:busy===c.id?.5:1 }}>🗑</button>
+                      {c.status==='suspended' ? (
+                        <button onClick={()=>reactivateCitizen(c.id)} disabled={busy===c.id} style={{ ...btnS('#22c55e','#fff'), opacity:busy===c.id?.5:1 }}>✓ AKTİF ET</button>
+                      ) : (
+                        <>
+                          <button onClick={()=>regenerateCode(c.id)} disabled={busy===c.id} style={{ ...btnS('var(--navy3)','var(--teal2)'), border:'1px solid var(--border)', opacity:busy===c.id?.5:1 }}>🔄 YENİ KOD</button>
+                          <button onClick={()=>suspendCitizen(c.id,`${c.first_name} ${c.last_name}`)} disabled={busy===c.id} style={{ ...btnS('transparent','#ef4444'), border:'1px solid rgba(239,68,68,.3)', opacity:busy===c.id?.5:1 }}>⏸ PASİF</button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>

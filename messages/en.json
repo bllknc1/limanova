@@ -222,6 +222,7 @@
     "code_placeholder": "• • • • • • • •",
     "btn": "LOGIN",
     "invalid": "Invalid email or access code. Please check your citizenship approval message.",
+    "suspended": "Your citizenship has been suspended. Contact administration for details.",
     "error": "Connection error. Please try again.",
     "no_account": "Not a citizen yet?",
     "apply_link": "Apply for Citizenship",
