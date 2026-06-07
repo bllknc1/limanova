@@ -11,13 +11,11 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { email, first_name, last_name, country, science_field, vision } = body;
 
-    // Save application to database
     await supabaseAdmin.from('applications').upsert({
       email, first_name, last_name, country, science_field, vision,
       payment_status: 'unpaid', status: 'pending',
     }, { onConflict: 'email' });
 
-    // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       customer_email: email,
