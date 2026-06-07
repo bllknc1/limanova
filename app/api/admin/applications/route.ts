@@ -12,18 +12,17 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-// Generate a human-readable access code
 function generateAccessCode(): string {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // No I/O/0/1 for readability
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = 'LMN-';
   for (let i = 0; i < 8; i++) {
     code += chars[crypto.randomInt(chars.length)];
     if (i === 3) code += '-';
   }
-  return code; // Format: LMN-XXXX-XXXX
+  return code;
 }
 
-// GET — Tüm başvuruları getir
+// GET — Tüm başvuruları + vatandaşları getir
 export async function GET(req: NextRequest) {
   const secret = req.headers.get('x-admin-secret');
   if (secret !== ADMIN_SECRET) {
@@ -31,34 +30,75 @@ export async function GET(req: NextRequest) {
   }
 
   const supabase = getSupabase();
-  const { data, error } = await supabase
+
+  // Fetch applications
+  const { data: applications, error: appErr } = await supabase
     .from('applications')
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-
-  // Also get citizen count
-  const { count } = await supabase
+  // Fetch citizens with access codes
+  const { data: citizens, error: citErr } = await supabase
     .from('citizens')
-    .select('*', { count: 'exact', head: true });
+    .select('*')
+    .order('created_at', { ascending: false });
 
-  return NextResponse.json({ applications: data, citizenCount: count ?? 0 });
+  if (appErr) return NextResponse.json({ error: appErr.message }, { status: 500 });
+
+  return NextResponse.json({
+    applications: applications || [],
+    citizens: citizens || [],
+  });
 }
 
-// POST — Başvuruyu onayla veya reddet
+// POST — Başvuruyu onayla/reddet veya vatandaş erişim kodunu değiştir
 export async function POST(req: NextRequest) {
   const secret = req.headers.get('x-admin-secret');
   if (secret !== ADMIN_SECRET) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const { applicationId, action } = await req.json();
+  const body = await req.json();
+  const { applicationId, action, citizenId, newAction } = body;
+
+  const supabase = getSupabase();
+
+  // --- Vatandaş erişim kodu yenileme ---
+  if (newAction === 'regenerate_code' && citizenId) {
+    const newCode = generateAccessCode();
+    const { error } = await supabase
+      .from('citizens')
+      .update({ access_code: newCode })
+      .eq('id', citizenId);
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, newAction: 'code_regenerated', accessCode: newCode });
+  }
+
+  // --- Vatandaş erişim kodunu manuel ayarlama ---
+  if (newAction === 'set_code' && citizenId && body.code) {
+    const { error } = await supabase
+      .from('citizens')
+      .update({ access_code: body.code })
+      .eq('id', citizenId);
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, newAction: 'code_set' });
+  }
+
+  // --- Vatandaş silme ---
+  if (newAction === 'delete_citizen' && citizenId) {
+    // Delete sessions first
+    await supabase.from('citizen_sessions').delete().eq('citizen_id', citizenId);
+    const { error } = await supabase.from('citizens').delete().eq('id', citizenId);
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ ok: true, newAction: 'citizen_deleted' });
+  }
+
+  // --- Başvuru işlemleri ---
   if (!applicationId || !['approve', 'reject'].includes(action)) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
   }
-
-  const supabase = getSupabase();
 
   if (action === 'reject') {
     const { error } = await supabase
@@ -70,7 +110,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, action: 'rejected' });
   }
 
-  // APPROVE — başvuruyu onayla ve citizens tablosuna taşı
+  // APPROVE
   const { data: app, error: fetchErr } = await supabase
     .from('applications')
     .select('*')
@@ -81,10 +121,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Application not found' }, { status: 404 });
   }
 
-  // Generate unique access code for the citizen
   const accessCode = generateAccessCode();
 
-  // Citizens tablosuna ekle (citizenship_number otomatik trigger ile oluşur)
   const { data: citizen, error: citizenErr } = await supabase
     .from('citizens')
     .insert({
@@ -104,7 +142,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: `Citizen insert failed: ${citizenErr.message}` }, { status: 500 });
   }
 
-  // Başvuru durumunu güncelle
   await supabase
     .from('applications')
     .update({ status: 'approved' })
@@ -114,6 +151,6 @@ export async function POST(req: NextRequest) {
     ok: true,
     action: 'approved',
     citizen,
-    accessCode, // Admin panelinde görüntülenir — vatandaşa gönderilecek
+    accessCode,
   });
 }
