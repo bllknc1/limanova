@@ -1,37 +1,75 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 
 export default function ShopPage() {
   const t = useTranslations('shop');
   const locale = useLocale();
+  const router = useRouter();
   const items = t.raw('items') as any[];
   const [orderItem, setOrderItem] = useState<any>(null);
   const [address, setAddress] = useState('');
+  const [ordering, setOrdering] = useState(false);
   const [ordered, setOrdered] = useState<string[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [citizenName, setCitizenName] = useState('');
 
-  // In production: check if user is logged in via Supabase auth
-  const isLoggedIn = false; // Replace with: const { data: { session } } = await supabase.auth.getSession()
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('lmn_token');
+      const citizen = localStorage.getItem('lmn_citizen');
+      setIsLoggedIn(!!token);
+      if (citizen) {
+        try { const c = JSON.parse(citizen); setCitizenName(`${c.first_name} ${c.last_name}`); } catch {}
+      }
+    };
+    checkAuth();
+    window.addEventListener('lmn_auth_change', checkAuth);
+    return () => window.removeEventListener('lmn_auth_change', checkAuth);
+  }, []);
 
   const handleOrder = (item: any) => {
     if (!isLoggedIn) {
-      alert(t('login_required'));
+      router.push(`/${locale}/login`);
       return;
     }
     setOrderItem(item);
   };
 
   const confirmOrder = async () => {
-    if (!address.trim()) return;
-    // In production: call API to create order + Stripe checkout
-    setOrdered(o => [...o, orderItem.id]);
-    setOrderItem(null);
-    setAddress('');
+    if (!address.trim() || ordering) return;
+    setOrdering(true);
+    try {
+      const token = localStorage.getItem('lmn_token');
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({
+          itemId: orderItem.id,
+          itemName: orderItem.name,
+          price: orderItem.price,
+          address,
+        }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        setOrdered(o => [...o, orderItem.id]);
+        setOrderItem(null);
+        setAddress('');
+      }
+    } catch {
+      alert(locale === 'tr' ? 'Bir hata oluştu.' : 'An error occurred.');
+    }
+    setOrdering(false);
   };
 
-const categories = Array.from(new Set(items.map((i: any) => i.category)));
+  const categories = Array.from(new Set(items.map((i: any) => i.category)));
+
   return (
     <>
       <Navbar />
@@ -41,8 +79,17 @@ const categories = Array.from(new Set(items.map((i: any) => i.category)));
         <p style={{ color: 'var(--text2)', fontSize: '1.05rem', lineHeight: 1.8, marginBottom: '2.5rem' }}>{t('intro')}</p>
 
         {!isLoggedIn && (
-          <div style={{ background: 'rgba(201,162,39,.06)', border: '1px solid var(--border2)', padding: '1rem 1.5rem', marginBottom: '2rem', fontSize: '.9rem', color: 'var(--gold)', fontStyle: 'italic', textAlign: 'center' }}>
-            🔒 {t('login_required')} — {locale === 'tr' ? 'Vatandaş girişi yapın.' : 'Please log in as a citizen.'}
+          <div
+            onClick={() => router.push(`/${locale}/login`)}
+            style={{ background: 'rgba(201,162,39,.06)', border: '1px solid var(--border2)', padding: '1rem 1.5rem', marginBottom: '2rem', fontSize: '.9rem', color: 'var(--gold)', textAlign: 'center', cursor: 'pointer', transition: '.2s' }}
+          >
+            🔒 {t('login_required')} — {locale === 'tr' ? 'Vatandaş girişi yapın.' : 'Please log in as a citizen.'} →
+          </div>
+        )}
+
+        {isLoggedIn && (
+          <div style={{ background: 'rgba(34,197,94,.06)', border: '1px solid rgba(34,197,94,.2)', padding: '1rem 1.5rem', marginBottom: '2rem', fontSize: '.9rem', color: '#22c55e', textAlign: 'center' }}>
+            ✓ {locale === 'tr' ? `Hoş geldin, ${citizenName}. Sipariş verebilirsin.` : `Welcome, ${citizenName}. You can place orders.`}
           </div>
         )}
 
@@ -83,13 +130,11 @@ const categories = Array.from(new Set(items.map((i: any) => i.category)));
 
         {/* Order modal */}
         {orderItem && (
-          <div style={{
-            position: 'fixed', inset: 0, background: 'rgba(0,0,0,.7)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200,
-          }}>
+          <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200 }}>
             <div style={{ background: 'var(--navy2)', border: '1px solid var(--border2)', padding: '2rem', maxWidth: 480, width: '90%' }}>
-              <h3 style={{ fontFamily: 'var(--font-display)', color: 'var(--gold)', marginBottom: '1rem' }}>{orderItem.name}</h3>
-              <p style={{ color: 'var(--text2)', fontSize: '.9rem', marginBottom: '1.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', color: 'var(--gold)', marginBottom: '.5rem' }}>{orderItem.name}</h3>
+              <p style={{ color: 'var(--teal2)', fontFamily: 'var(--font-display)', fontSize: '1.3rem', marginBottom: '1.5rem' }}>${orderItem.price}</p>
+              <p style={{ color: 'var(--text2)', fontSize: '.9rem', marginBottom: '.5rem' }}>
                 {locale === 'tr' ? 'Kargo adresi girin:' : 'Enter your shipping address:'}
               </p>
               <textarea
@@ -98,12 +143,12 @@ const categories = Array.from(new Set(items.map((i: any) => i.category)));
                 placeholder={locale === 'tr' ? 'Tam adres, şehir, ülke...' : 'Full address, city, country...'}
               />
               <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
-                <button onClick={confirmOrder} style={{
-                  flex: 1, background: 'var(--gold)', color: 'var(--navy)',
+                <button onClick={confirmOrder} disabled={ordering} style={{
+                  flex: 1, background: ordering ? 'var(--gold-dim)' : 'var(--gold)', color: 'var(--navy)',
                   fontFamily: 'var(--font-display)', fontSize: '.8rem', letterSpacing: '.1em',
-                  padding: '12px', border: 'none', cursor: 'pointer', fontWeight: 600,
+                  padding: '12px', border: 'none', cursor: ordering ? 'wait' : 'pointer', fontWeight: 600,
                 }}>
-                  {locale === 'tr' ? `Onayla ($${orderItem.price})` : `Confirm ($${orderItem.price})`}
+                  {ordering ? '...' : locale === 'tr' ? `Onayla ($${orderItem.price})` : `Confirm ($${orderItem.price})`}
                 </button>
                 <button onClick={() => setOrderItem(null)} style={{
                   flex: 1, background: 'transparent', color: 'var(--text2)',
