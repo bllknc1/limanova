@@ -205,6 +205,25 @@
     "titles": "Unvanlar ve Onurlar",
     "edit": "Profili Düzenle"
   },
+  "admin": {
+    "title": "Derin Devlet — Yönetim Paneli",
+    "subtitle": "Vatandaşlık Komisyonu Kontrol Merkezi",
+    "login_title": "DERİN DEVLET",
+    "login_sub": "YÖNETİM PANELİ",
+    "enter_code": "Erişim kodu",
+    "login": "GİRİŞ",
+    "logout": "ÇIKIŞ",
+    "total": "Toplam",
+    "pending": "Bekleyen",
+    "approved": "Onaylı",
+    "rejected": "Reddedildi",
+    "paid": "Ödeme Yapan",
+    "approve": "ONAYLA",
+    "reject": "RED",
+    "refresh": "YENİLE",
+    "visions": "BAŞVURU VİZYONLARI",
+    "no_applications": "Başvuru bulunamadı."
+  },
   "common": {
     "loading": "Yükleniyor...",
     "error": "Bir hata oluştu.",
