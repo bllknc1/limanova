@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "home": "Home",
+    "constitution": "Constitution",
+    "structure": "State Structure",
+    "citizenship": "Citizenship",
+    "shop": "Shop",
+    "login": "Login",
+    "apply": "Apply Now"
+  },
+  "hero": {
+    "subtitle": "Science State — Heart of the Sea",
+    "motto": "Knowledge is the supreme power, science is the fairest ruler — power is born not from the crown, but from truth.",
+    "cta_apply": "Become a Citizen",
+    "cta_constitution": "Read the Constitution",
+    "stat_founding": "Founding State",
+    "stat_citizens": "Citizens",
+    "stat_potential": "Scientific Potential"
+  },
+  "citizenship": {
+    "title": "Citizenship Application",
+    "tag": "Join Us",
+    "intro": "Limanova citizenship is open to everyone who demonstrates their belief in science and their willingness to contribute. The application process follows the steps below.",
+    "step1_title": "Fill out the form",
+    "step1_body": "Share your personal information, field of science, and contribution vision.",
+    "step2_title": "Upload documents",
+    "step2_body": "ID document, and if available, proof of academic or scientific work. (Being an academic is not required — curiosity is enough.)",
+    "step3_title": "Pay the founding support fee",
+    "step3_body": "A one-time $10 founding support contribution is required before your application is submitted. This helps fund the land reclamation of Limanova.",
+    "step4_title": "Review",
+    "step4_body": "The Citizenship Commission reviews your application. The process takes 7–14 days.",
+    "step5_title": "Welcome, Limanovar!",
+    "step5_body": "Accepted citizens receive a personal profile page and citizenship number.",
+    "form_title": "Citizenship Application Form",
+    "form_sub": "All fields are required. A $10 founding support fee applies.",
+    "field_first": "First Name",
+    "field_last": "Last Name",
+    "field_email": "Email",
+    "field_country": "Country of Residence",
+    "field_science": "Primary Science Field",
+    "field_vision": "Contribution Vision Statement",
+    "field_vision_placeholder": "What do you want to do for science, humanity, and Limanova? Tell us your dreams, projects, or curiosity...",
+    "field_doc": "Supporting Document (optional)",
+    "field_doc_sub": "CV, paper, project or ID — PDF, JPG, PNG — max 10MB",
+    "btn_next": "Continue to Payment ($10)",
+    "review_note": "Limanova citizenship cannot be bought. Every application is evaluated solely on contribution potential.",
+    "science_fields": [
+      "Physics",
+      "Chemistry",
+      "Biology / Medicine",
+      "Mathematics",
+      "Computer Science / AI",
+      "Engineering",
+      "Marine Sciences / Oceanography",
+      "Astronomy / Space",
+      "Social / Behavioral Sciences",
+      "Interdisciplinary",
+      "Other"
+    ]
+  },
+  "shop": {
+    "title": "Official Limanova Shop",
+    "tag": "Citizen Store",
+    "intro": "Official Limanova documents and merchandise. Physical items are printed and shipped by the Limanova administration. Login required to purchase.",
+    "login_required": "Login required to purchase",
+    "add_to_cart": "Order",
+    "items": [
+      {
+        "id": "passport",
+        "name": "Official Passport",
+        "description": "Hardcover booklet, embossed seal, personal photo page. Ships within 4 weeks.",
+        "price": 45,
+        "category": "Documents"
+      },
+      {
+        "id": "id_card",
+        "name": "Citizen ID Card",
+        "description": "PVC card, laminated, with citizenship number and QR code.",
+        "price": 20,
+        "category": "Documents"
+      },
+      {
+        "id": "driving_license",
+        "name": "Limanova Driving License",
+        "description": "Symbolic document, credit-card format. Not valid for traffic use.",
+        "price": 15,
+        "category": "Documents"
+      },
+      {
+        "id": "flag_small",
+        "name": "Flag (30x45 cm)",
+        "description": "Woven polyester, vibrant colors. Includes pole hook.",
+        "price": 25,
+        "category": "Flags & Symbols"
+      },
+      {
+        "id": "flag_large",
+        "name": "Flag (90x150 cm)",
+        "description": "Large format, outdoor quality polyester.",
+        "price": 45,
+        "category": "Flags & Symbols"
+      },
+      {
+        "id": "pin",
+        "name": "Limanova Lapel Pin",
+        "description": "Metal, enamel finish, gold border. Ships worldwide.",
+        "price": 12,
+        "category": "Flags & Symbols"
+      }
+    ]
+  },
+  "constitution": {
+    "title": "Constitution of Limanova",
+    "tag": "Founding Document",
+    "intro": "Limanova is a meritocratic state founded under the guidance of science, rising above the sea, open to all of humanity. This constitution safeguards the fundamental principles, governance structure, and citizen rights of Limanova.",
+    "articles": [
+      {
+        "num": "Article I",
+        "title": "Foundation: Science Meritocracy",
+        "body": "In Limanova, political power is based not on birthright, wealth, or lineage — but solely on scientific contribution and demonstrated knowledge. The state's highest administrator represents the most powerful scientific mind of the period. This title is determined through scientific competition and internationally peer-reviewed evaluation."
+      },
+      {
+        "num": "Article II",
+        "title": "The Science President (King)",
+        "body": "Each elected Science President serves a term of one year. If no greater scientific genius emerges to challenge the title within the term, the presidency is extended by one more year. Total tenure cannot exceed two years. At the end of the term, the Science President transitions to the Advisory Council and may never stand as a candidate again. The advisory role may continue for life."
+      },
+      {
+        "num": "Article III",
+        "title": "The Deep State: Protective Order",
+        "body": "The founder of Limanova and the permanent protective layer is known as the 'Deep State.' This structure is responsible for security, intelligence, military defense, and state integrity. The Deep State never runs in elections, never seeks to overthrow any government; it only protects the existence of the state. No one — not even the King — can dissolve this structure. This role is carried by the founding family in perpetuity."
+      },
+      {
+        "num": "Article IV",
+        "title": "Scientific Freedom & Experimental Zone",
+        "body": "The territory of Limanova, built upon a reclaimed seamount, holds the status of Free Research Zone, granting a flexible legal framework for scientific experiments. Research restricted in other states but within ethical boundaries may be conducted in this zone under the supervision of the Science Council."
+      },
+      {
+        "num": "Article V",
+        "title": "Citizenship",
+        "body": "Limanova citizenship is open not to race, language, religion, or geography — but solely to the will to contribute to science. All applicants are evaluated. Acceptance is granted by the Citizenship Commission based on scientific interest, motivation, and declared contribution potential. A one-time $10 founding support fee is required. Citizenship can never be purchased beyond this symbolic contribution."
+      },
+      {
+        "num": "Article VI",
+        "title": "Fundamental Rights",
+        "body": "Every Limanova citizen has: freedom of expression, the right to access knowledge, the right to a fair trial, and the freedom of scientific research. Censorship is prohibited. The deliberate spread of misinformation is considered a crime against the state."
+      },
+      {
+        "num": "Article VII",
+        "title": "Territory & Special Provisions",
+        "body": "Limanova is built upon a reclaimed seamount. Children are not permitted to reside on Limanova territory — it is a scientific working community. Only individuals who have left a historic mark on humanity may be buried in Limanova soil. All land within Limanova is state property and may be developed through donations for scientific facilities."
+      }
+    ]
+  },
+  "structure": {
+    "title": "State Structure",
+    "tag": "Governance",
+    "intro": "Limanova has a power hierarchy centered on science, fundamentally diverging from traditional state models. Each institution is designed to fulfill a specific function.",
+    "cards": [
+      {
+        "icon": "🜁",
+        "title": "Deep State",
+        "body": "The founding and permanent protective layer of the state. Responsible for security, intelligence, and military defense. Does not change by election, does not seek power — only protects. Led by the founding family in perpetuity.",
+        "badge": "INSTITUTIONAL — PERMANENT"
+      },
+      {
+        "icon": "👑",
+        "title": "Science President (King)",
+        "body": "Represents the supreme scientific mind of the period. Tenure 1–2 years. Manages the executive, science policy, and foreign relations. Elected by merit.",
+        "badge": "ELECTED — TEMPORARY"
+      },
+      {
+        "icon": "🔬",
+        "title": "Science Council",
+        "body": "Sets research priorities, conducts ethical oversight. Approves all experiments conducted in the Free Research Zone. Composed of 9 expert members.",
+        "badge": "ADVISORY — REGULATORY"
+      },
+      {
+        "icon": "🏛",
+        "title": "Advisory Council",
+        "body": "Composed of former Science Presidents who have completed their term. Lifetime membership. Though without binding decision authority, they transfer their experience and knowledge to the state.",
+        "badge": "ADVISORY — LIFETIME"
+      },
+      {
+        "icon": "⚖",
+        "title": "Citizenship Commission",
+        "body": "Evaluates applications and makes citizenship decisions. Reviews scientific contribution potential, motivation, and identity documents.",
+        "badge": "ADMINISTRATIVE"
+      },
+      {
+        "icon": "🌊",
+        "title": "Free Research Zone",
+        "body": "The entirety of Limanova territory built on a reclaimed seamount. Flexible research legislation. Free within ethical limits under Science Council oversight.",
+        "badge": "GEOGRAPHIC — SPECIAL STATUS"
+      }
+    ]
+  },
+  "profile": {
+    "title": "Citizen Profile",
+    "citizenship_no": "Citizenship No",
+    "field": "Field",
+    "country": "Country",
+    "member_since": "Member Since",
+    "bio": "Biography",
+    "projects": "Projects & Research",
+    "titles": "Titles & Honors",
+    "edit": "Edit Profile"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred.",
+    "close": "Close"
+  }
+}

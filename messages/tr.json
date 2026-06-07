@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "constitution": "Anayasa",
+    "structure": "Devlet Yapısı",
+    "citizenship": "Vatandaşlık",
+    "shop": "Mağaza",
+    "login": "Giriş",
+    "apply": "Başvur"
+  },
+  "hero": {
+    "subtitle": "Bilim Devleti — Denizin Kalbinde",
+    "motto": "Bilgi en yüce güçtür, bilim en adil yöneticidir — güç taçtan değil, hakikatten doğar.",
+    "cta_apply": "Vatandaş Ol",
+    "cta_constitution": "Anayasayı Oku",
+    "stat_founding": "Kurucu Devlet",
+    "stat_citizens": "Vatandaş",
+    "stat_potential": "Bilimsel Potansiyel"
+  },
+  "citizenship": {
+    "title": "Vatandaşlık Başvurusu",
+    "tag": "Katıl",
+    "intro": "Limanova vatandaşlığı, bilime inancını ve katkı iradesini kanıtlayan herkese açıktır. Başvuru süreci aşağıdaki adımları izler.",
+    "step1_title": "Formu Doldur",
+    "step1_body": "Kişisel bilgilerini, bilim alanını ve katkı vizyonunu paylaş.",
+    "step2_title": "Belgeleri Yükle",
+    "step2_body": "Kimlik belgesi ve varsa akademik çalışma kanıtları. Akademisyen olmak zorunlu değil — merak yeterli.",
+    "step3_title": "Kuruluş Destek Ödemesi",
+    "step3_body": "Başvurunuz gönderilebilmesi için bir kerelik 10 dolarlık kuruluş destek katkısı gerekmektedir. Bu katkı Limanova'nın dolgu arazisinin finansmanına gider.",
+    "step4_title": "Değerlendirme",
+    "step4_body": "Vatandaşlık Komisyonu başvurunu inceler. Süreç 7–14 gün sürer.",
+    "step5_title": "Hoş Geldin, Limanovar!",
+    "step5_body": "Kabul edilen vatandaşlara kişisel profil sayfası ve vatandaşlık numarası verilir.",
+    "form_title": "Vatandaşlık Başvuru Formu",
+    "form_sub": "Tüm alanlar zorunludur. 10 dolarlık kuruluş destek ücreti uygulanır.",
+    "field_first": "Ad",
+    "field_last": "Soyad",
+    "field_email": "E-posta",
+    "field_country": "Yaşadığınız Ülke",
+    "field_science": "Birincil Bilim Alanı",
+    "field_vision": "Katkı Vizyon Beyanı",
+    "field_vision_placeholder": "Bilim, insanlık ve Limanova için ne yapmak istiyorsunuz? Hayallerinizi, projelerinizi veya merakınızı anlatın...",
+    "field_doc": "Destekleyici Belge (opsiyonel)",
+    "field_doc_sub": "CV, makale, proje veya kimlik — PDF, JPG, PNG — maks. 10MB",
+    "btn_next": "Ödemeye Geç ($10)",
+    "review_note": "Limanova vatandaşlığı satın alınamaz. Her başvuru yalnızca katkı potansiyeline göre değerlendirilir.",
+    "science_fields": [
+      "Fizik",
+      "Kimya",
+      "Biyoloji / Tıp",
+      "Matematik",
+      "Bilgisayar Bilimleri / Yapay Zeka",
+      "Mühendislik",
+      "Deniz Bilimleri / Oşinografi",
+      "Astronomi / Uzay",
+      "Sosyal / Davranış Bilimleri",
+      "Disiplinlerarası",
+      "Diğer"
+    ]
+  },
+  "shop": {
+    "title": "Resmi Limanova Mağazası",
+    "tag": "Vatandaş Mağazası",
+    "intro": "Resmi Limanova belgeleri ve ürünleri. Fiziksel ürünler Limanova yönetimi tarafından basılır ve kargoya verilir. Satın alma için giriş zorunludur.",
+    "login_required": "Satın almak için giriş yapın",
+    "add_to_cart": "Sipariş Ver",
+    "items": [
+      {
+        "id": "passport",
+        "name": "Resmi Pasaport",
+        "description": "Sert kapak kitapçık, kabartmalı mühür, kişisel fotoğraf sayfası. 4 hafta içinde kargoya verilir.",
+        "price": 45,
+        "category": "Belgeler"
+      },
+      {
+        "id": "id_card",
+        "name": "Vatandaş Kimlik Kartı",
+        "description": "PVC kart, lamine, vatandaşlık numarası ve QR kod ile.",
+        "price": 20,
+        "category": "Belgeler"
+      },
+      {
+        "id": "driving_license",
+        "name": "Limanova Ehliyet",
+        "description": "Sembolik belge, kredi kartı formatında. Trafik için geçerli değildir.",
+        "price": 15,
+        "category": "Belgeler"
+      },
+      {
+        "id": "flag_small",
+        "name": "Bayrak (30x45 cm)",
+        "description": "Dokuma polyester, canlı renkler. Direk kancası dahil.",
+        "price": 25,
+        "category": "Bayrak ve Semboller"
+      },
+      {
+        "id": "flag_large",
+        "name": "Bayrak (90x150 cm)",
+        "description": "Büyük format, dış mekan kalitesi polyester.",
+        "price": 45,
+        "category": "Bayrak ve Semboller"
+      },
+      {
+        "id": "pin",
+        "name": "Limanova Rozeti",
+        "description": "Metal, emaye kaplama, altın bordür. Dünya geneli kargo.",
+        "price": 12,
+        "category": "Bayrak ve Semboller"
+      }
+    ]
+  },
+  "constitution": {
+    "title": "Limanova Anayasası",
+    "tag": "Temel Belge",
+    "intro": "Limanova, bilimin rehberliğinde kurulan, deniz üzerinde yükselen ve tüm insanlığa açık kapıları olan meritokratik bir devlettir. Bu anayasa, Limanova'nın temel ilkelerini, yönetim biçimini ve vatandaş haklarını güvence altına alır.",
+    "articles": [
+      {
+        "num": "Madde I",
+        "title": "Devletin Temeli: Bilim Meritokrasisi",
+        "body": "Limanova'da siyasi iktidar, doğum hakkına, servete veya soya değil; yalnızca bilimsel katkıya ve kanıtlanmış bilgiye dayanır. Devletin en yüksek yöneticisi, dönemin en güçlü bilimsel zihnini temsil eden kişidir. Bu unvan, bilimsel yarışma ve uluslararası hakemli değerlendirme ile belirlenir."
+      },
+      {
+        "num": "Madde II",
+        "title": "Bilim Başkanı (Kral)",
+        "body": "Her seçilmiş Bilim Başkanı, görevini 1 yıl sürdürür. Görev süresi içinde bu unvana meydan okuyacak daha güçlü bir bilimsel deha ortaya çıkmazsa, başkanlık 1 yıl daha uzatılır. Görev süresi toplamda 2 yılı geçemez. Süre sonunda Bilim Başkanı Danışmanlar Kurulu'na geçer; bir daha aday olamaz. Danışmanlık rolü ömür boyu sürebilir."
+      },
+      {
+        "num": "Madde III",
+        "title": "Derin Devlet: Koruyucu Düzen",
+        "body": "Limanova'nın kurucusu ve kalıcı koruyucu katmanı 'Derin Devlet' olarak anılır. Bu yapı; güvenlik, istihbarat, askeri savunma ve devlet bütünlüğünden sorumludur. Derin Devlet hiçbir seçime girmez, hiçbir hükümeti devirmeye çalışmaz; yalnızca devletin varoluşunu korur. Kral dahil hiç kimse bu yapıyı lağvedemez. Bu görev, kurucu aile tarafından sürekli olarak sürdürülür."
+      },
+      {
+        "num": "Madde IV",
+        "title": "Bilim Özgürlüğü ve Deneysel Bölge",
+        "body": "Limanova'nın kuruluş yeri olan seamount üzerinde inşa edilen toprak, Serbest Araştırma Bölgesi statüsünde olup bilimsel deneyler için esnek yasal çerçeve tanınır. Diğer devletlerde kısıtlanmış ancak etik sınırlar içindeki araştırmalar, bu bölgede Bilim Kurulu denetiminde gerçekleştirilebilir."
+      },
+      {
+        "num": "Madde V",
+        "title": "Vatandaşlık Hakkı",
+        "body": "Limanova vatandaşlığı ırk, dil, din veya coğrafyaya değil; yalnızca bilime katkı iradesine açıktır. Başvuruda bulunan herkes değerlendirilir. Kabul, Vatandaşlık Komisyonu tarafından bilimsel ilgi, motivasyon ve beyan edilen katkı potansiyeline göre verilir. Bir kerelik 10 dolarlık kuruluş destek katkısı zorunludur. Vatandaşlık bu sembolik katkının ötesinde kesinlikle satın alınamaz."
+      },
+      {
+        "num": "Madde VI",
+        "title": "Temel Haklar",
+        "body": "Her Limanova vatandaşı; ifade özgürlüğü, bilgiye erişim hakkı, adil yargılanma hakkı ve bilimsel araştırma serbestisine sahiptir. Sansür yasaktır. Yanlış bilginin kasıtlı yayılması ise devlete karşı işlenmiş bir suç sayılır."
+      },
+      {
+        "num": "Madde VII",
+        "title": "Toprak ve Özel Hükümler",
+        "body": "Limanova, doldurulan bir seamount üzerine inşa edilmiştir. Çocukların Limanova topraklarında ikamet etmesi yasaktır — burası bilimsel bir çalışma topluluğudur. Yalnızca insanlık tarihine damga vurmuş kişiler Limanova toprağına defnedilebilir. Limanova'daki tüm arazi devlet mülküdür ve bilimsel tesisler için bağışlar aracılığıyla geliştirilebilir."
+      }
+    ]
+  },
+  "structure": {
+    "title": "Devlet Yapısı",
+    "tag": "Yönetim",
+    "intro": "Limanova, geleneksel devlet modellerinden köklü biçimde ayrılan, bilim merkezli bir güç hiyerarşisine sahiptir. Her kurum, belirli bir işlevi yerine getirmek üzere tasarlanmıştır.",
+    "cards": [
+      {
+        "icon": "🜁",
+        "title": "Derin Devlet",
+        "body": "Devletin kurucu ve kalıcı koruyucu katmanı. Güvenlik, istihbarat ve askeri savunmadan sorumludur. Seçimle değişmez, iktidar talep etmez; yalnızca korur. Kurucu aile tarafından sürekli olarak yönetilir.",
+        "badge": "KURUMSAL — KALICI"
+      },
+      {
+        "icon": "👑",
+        "title": "Bilim Başkanı (Kral)",
+        "body": "Dönemin en üstün bilimsel zihnini temsil eder. Görev süresi 1–2 yıl. Yürütme, bilim politikası ve dış ilişkileri yönetir. Liyakate dayalı seçilir.",
+        "badge": "SEÇİMLİ — GEÇİCİ"
+      },
+      {
+        "icon": "🔬",
+        "title": "Bilim Kurulu",
+        "body": "Araştırma önceliklerini belirler, etik denetim yapar. Serbest Araştırma Bölgesi'nde yürütülen tüm deneyleri onaylar. 9 uzman üyeden oluşur.",
+        "badge": "DANIŞMA — DENETİM"
+      },
+      {
+        "icon": "🏛",
+        "title": "Danışmanlar Kurulu",
+        "body": "Görevini tamamlamış eski Bilim Başkanlarından oluşur. Ömür boyu üyelik. Bağlayıcı karar yetkisi olmasa da deneyim ve bilgi birikimini devlete aktarır.",
+        "badge": "DANIŞMA — ÖMÜR BOYU"
+      },
+      {
+        "icon": "⚖",
+        "title": "Vatandaşlık Komisyonu",
+        "body": "Başvuruları değerlendirir, vatandaşlık kararlarını verir. Bilimsel katkı potansiyelini, motivasyonu ve kimlik belgelerini inceler.",
+        "badge": "İDARİ"
+      },
+      {
+        "icon": "🌊",
+        "title": "Serbest Araştırma Bölgesi",
+        "body": "Seamount üzerinde inşa edilen Limanova topraklarının tamamı. Esnek araştırma mevzuatı. Etik sınırlar içinde, Bilim Kurulu gözetiminde serbesttir.",
+        "badge": "COĞRAFYA — ÖZEL STATÜ"
+      }
+    ]
+  },
+  "profile": {
+    "title": "Vatandaş Profili",
+    "citizenship_no": "Vatandaşlık No",
+    "field": "Alan",
+    "country": "Ülke",
+    "member_since": "Üyelik Tarihi",
+    "bio": "Biyografi",
+    "projects": "Projeler ve Araştırmalar",
+    "titles": "Unvanlar ve Onurlar",
+    "edit": "Profili Düzenle"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu.",
+    "close": "Kapat"
+  }
+}

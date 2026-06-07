@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0a0e1a;
+  --navy2: #111827;
+  --navy3: #1e2a3a;
+  --gold: #c9a227;
+  --gold2: #e8c547;
+  --gold-dim: #a07e1a;
+  --teal: #1a8a7a;
+  --teal2: #22b09c;
+  --text: #e8e4d8;
+  --text2: #a89f8c;
+  --text3: #6b6357;
+  --border: rgba(201, 162, 39, 0.2);
+  --border2: rgba(201, 162, 39, 0.5);
+  --font-display: var(--font-cinzel), serif;
+  --font-body: var(--font-crimson), serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+
+/* Form inputs */
+input, select, textarea {
+  background: var(--navy3);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold-dim);
+}
+select option {
+  background: var(--navy3);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotateSeal {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fadein { animation: fadeInUp 0.5s ease forwards; }
+.animate-seal { animation: rotateSeal 40s linear infinite; }
+
+/* Utility */
+.gold { color: var(--gold); }
+.teal { color: var(--teal2); }
+.muted { color: var(--text2); }
+.dimmed { color: var(--text3); }
